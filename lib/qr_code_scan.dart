@@ -41,9 +41,9 @@ class _ScanPageState extends State<ScanPage> {
               onPressed: () async {
 
 
-                String codeSanner = await BarcodeScanner.scan();    //barcode scnner
+                var codeSanner = await BarcodeScanner.scan();    //barcode scnner
                 setState(() {
-                  qrCodeResult = codeSanner;
+                  qrCodeResult = codeSanner as String;
                 });
 
                 // try{

@@ -33,7 +33,9 @@ class _Welcomes extends State<Welcome> {
                         color: Colors.white,
                         fontWeight: FontWeight.w600),
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.of(context).pushNamed('/rootpage');
+                  },
                 ),
               ),
             ],
