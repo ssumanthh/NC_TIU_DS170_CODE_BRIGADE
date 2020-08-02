@@ -20,9 +20,12 @@ class MyApp extends StatelessWidget {
     ]);
     return new MaterialApp(
         title: 'Fill Me',
-        theme: new ThemeData(
-          primarySwatch: Colors.blue,
+        theme: ThemeData(
+          textTheme: GoogleFonts.montserratTextTheme(
+            Theme.of(context).textTheme,
+          ),
         ),
+        debugShowCheckedModeBanner: false,
         navigatorObservers: <NavigatorObserver>[
           MyRouteObserver(), // this will listen all changes
         ],
