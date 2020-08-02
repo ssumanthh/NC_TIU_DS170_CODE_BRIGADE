@@ -6,7 +6,7 @@ import 'package:fillme/authentication/root_page.dart';
 import 'widgets/RouteObserver.dart';
 import 'authentication/auth.dart';
 import 'authentication/root_page.dart';
-
+import 'package:google_fonts/google_fonts.dart';
 
 void main() => runApp(new MyApp());
 
