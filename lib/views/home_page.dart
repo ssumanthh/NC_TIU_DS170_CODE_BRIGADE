@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:percent_indicator/percent_indicator.dart';
-import 'package:tech_bin/widgets/qr_code_scan.dart';
+import 'package:fillme/qr_code_scan.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class HomePage extends StatefulWidget {
- 
-
   @override
   _Home createState() => new _Home();
 }
@@ -18,8 +16,6 @@ class _Home extends State<HomePage> {
   }
 
   Widget build(BuildContext context) {
-   
-
     return Scaffold(
       backgroundColor: Colors.white,
       body: Column(

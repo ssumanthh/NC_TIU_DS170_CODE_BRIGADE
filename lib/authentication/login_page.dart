@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'auth.dart';
@@ -89,8 +88,7 @@ class _LoginPageState extends State<LoginPage> {
           print(e);
         }
       } else {
-       
-        loading = false; 
+        loading = false;
         Alert(context: context, title: 'Login Failed', desc: 'Invaild User')
             .show();
       }
@@ -124,11 +122,8 @@ class _LoginPageState extends State<LoginPage> {
           print(e);
         }
       } else {
-       
-          
-           loading = false;
+        loading = false;
 
-       
         Alert(
                 context: context,
                 title: 'Login Failed',
@@ -488,7 +483,8 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       ),
                     ]),
-                onPressed: moveToRegister),
+                onPressed: moveToRegister,
+                ),
           ]),
         ];
       case FormType.register:
@@ -498,7 +494,8 @@ class _LoginPageState extends State<LoginPage> {
               key: new Key('register'),
               text: 'Create an account',
               height: 50.0,
-              onPressed: validateAndSubmit),
+              onPressed:validateAndSubmit,
+              ),
           SizedBox(height: 5),
           new Text(
             'OR',
