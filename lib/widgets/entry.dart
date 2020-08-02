@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import '../authentication/login_page.dart';
 import '../authentication/auth.dart';
 import '../qr_code_scan.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 // ignore: must_be_immutable
 class EntryPage extends StatefulWidget {
