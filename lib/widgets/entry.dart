@@ -133,7 +133,7 @@ class _EntryPageState extends State<EntryPage> {
                   title: new Row(children: [
                     Icon(
                       Icons.notifications_none,
-                      color: Colors.lightGreen[800],
+                      color:Colors.teal[400],
                     ),
                     Container(
                       padding: EdgeInsets.fromLTRB(20, 10, 10, 10),
@@ -159,7 +159,7 @@ class _EntryPageState extends State<EntryPage> {
                       children: [
                         Icon(
                           Icons.attach_money,
-                          color: Colors.lightGreen[800],
+                          color: Colors.teal[400],
                         ),
                         Container(
                           padding: EdgeInsets.fromLTRB(20, 10, 10, 10),
@@ -184,7 +184,7 @@ class _EntryPageState extends State<EntryPage> {
                     title: new Row(children: [
                       Icon(
                         Icons.person_outline,
-                        color: Colors.lightGreen[800],
+                        color:Colors.teal[400],
                       ),
                       Container(
                         padding: EdgeInsets.fromLTRB(20, 10, 10, 10),
@@ -210,7 +210,7 @@ class _EntryPageState extends State<EntryPage> {
                     title: new Row(children: [
                       Icon(
                         Icons.help_outline,
-                        color: Colors.lightGreen[800],
+                        color:Colors.teal[400],
                       ),
                       Container(
                         padding: EdgeInsets.fromLTRB(20, 10, 10, 10),
@@ -236,7 +236,7 @@ class _EntryPageState extends State<EntryPage> {
                     title: new Row(children: [
                       Icon(
                         Icons.info_outline,
-                        color: Colors.lightGreen[800],
+                        color: Colors.teal[400],
                       ),
                       Container(
                         padding: EdgeInsets.fromLTRB(20, 10, 10, 10),
@@ -260,7 +260,7 @@ class _EntryPageState extends State<EntryPage> {
                     title: new Row(children: [
                       Icon(
                         Icons.settings,
-                        color: Colors.lightGreen[800],
+                        color: Colors.teal[400],
                       ),
                       Container(
                         padding: EdgeInsets.fromLTRB(20, 10, 10, 10),
@@ -286,7 +286,7 @@ class _EntryPageState extends State<EntryPage> {
                     title: new Row(children: [
                       Icon(
                         Icons.share,
-                        color: Colors.lightGreen[800],
+                        color: Colors.teal[400],
                       ),
                       Container(
                         padding: EdgeInsets.fromLTRB(20, 10, 10, 10),
@@ -312,7 +312,7 @@ class _EntryPageState extends State<EntryPage> {
                   title: new Row(children: [
                     Icon(
                       Icons.exit_to_app,
-                      color: Colors.lightGreen[800],
+                      color:Colors.teal[400],
                     ),
                     Container(
                       padding: EdgeInsets.fromLTRB(20, 10, 10, 10),
@@ -337,7 +337,7 @@ class _EntryPageState extends State<EntryPage> {
                       margin: EdgeInsets.fromLTRB(100, 50, 120, 0),
                       height: 4,
                       decoration: BoxDecoration(
-                        color: Colors.lightGreen[800],
+                        color:Colors.teal[400],
                       ),
                     ),
                   ),
