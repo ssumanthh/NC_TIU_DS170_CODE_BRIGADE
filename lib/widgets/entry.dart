@@ -385,7 +385,7 @@ class _EntryPageState extends State<EntryPage> {
           currentIndex: widget.selectedIndex,
           type: BottomNavigationBarType.fixed,
           selectedFontSize: 15,
-          selectedItemColor: Colors.blue[500],
+            selectedItemColor: Colors.tealAccent[700],
           unselectedItemColor: Colors.black26,
           items: [
             BottomNavigationBarItem(
