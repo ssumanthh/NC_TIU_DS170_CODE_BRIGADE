@@ -1,18 +1,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:tech_bin/views/news.dart';
-
-import 'package:tech_bin/widgets/chart.dart';
-import 'package:tech_bin/widgets/rewards.dart';
-import 'rewards.dart';
-import 'google_map.dart';
 import '../authentication/login_page.dart';
-import '../views/about_us.dart';
 import '../authentication/auth.dart';
-import '../views/help.dart';
-import '../views/home_page.dart';
-import 'qr_code_scan.dart';
+import '../qr_code_scan.dart';
 
 // ignore: must_be_immutable
 class EntryPage extends StatefulWidget {
@@ -46,10 +37,7 @@ class _EntryPageState extends State<EntryPage> {
       }
     }
 
-    final _widgetOptions = [
-      new HomePage(collection: randomNumber),
-      new Rewards(),
-    ];
+    
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -70,12 +58,7 @@ class _EntryPageState extends State<EntryPage> {
                   size: 30,
                 ),
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => GoogleMaps(),
-                    ),
-                  );
+                 
                 }),
           ),
         ],
@@ -87,7 +70,7 @@ class _EntryPageState extends State<EntryPage> {
           return Future.value(true);
         },
         child: Center(
-          child: _widgetOptions.elementAt(widget.selectedIndex),
+          child:Text("Home")
         ),
       ),
       drawer: ClipRRect(
@@ -175,10 +158,7 @@ class _EntryPageState extends State<EntryPage> {
                       ],
                     ),
                     onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => Rewards()),
-                      );
+                     
                     }),
                 ListTile(
                     title: new Row(children: [
@@ -199,12 +179,7 @@ class _EntryPageState extends State<EntryPage> {
                       ),
                     ]),
                     onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => AbooutUs(),
-                        ),
-                      );
+                     
                     }),
                 ListTile(
                     title: new Row(children: [
@@ -225,12 +200,7 @@ class _EntryPageState extends State<EntryPage> {
                       ),
                     ]),
                     onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => Help(),
-                        ),
-                      );
+                      
                     }),
                 ListTile(
                     title: new Row(children: [
@@ -251,10 +221,7 @@ class _EntryPageState extends State<EntryPage> {
                       )
                     ]),
                     onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => AbooutUs()),
-                      );
+                      
                     }),
                 ListTile(
                     title: new Row(children: [
@@ -275,12 +242,7 @@ class _EntryPageState extends State<EntryPage> {
                       ),
                     ]),
                     onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => AbooutUs(),
-                        ),
-                      );
+                      
                     }),
                 ListTile(
                     title: new Row(children: [
@@ -301,12 +263,7 @@ class _EntryPageState extends State<EntryPage> {
                       ),
                     ]),
                     onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => AbooutUs(),
-                        ),
-                      );
+                     
                     }),
                 ListTile(
                   title: new Row(children: [
@@ -369,7 +326,7 @@ class _EntryPageState extends State<EntryPage> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => Scanner(),
+                builder: (context) => ScanPage(),
               ),
             );
           }),
@@ -419,7 +376,7 @@ class _EntryPageState extends State<EntryPage> {
           ],
           onTap: (index) {
             setState(() {
-              _widgetOptions.elementAt(index);
+              
               widget.selectedIndex = index;
             });
           },

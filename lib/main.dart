@@ -1,23 +1,41 @@
-import 'package:fillme/welcome_page.dart';
+
+import 'package:fillme/views/welcome_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:fillme/authentication/root_page.dart';
+import 'widgets/RouteObserver.dart';
+import 'authentication/auth.dart';
+import 'authentication/root_page.dart';
 
-void main() => runApp(new Welcome());
 
-class MyApp extends StatefulWidget {
+void main() => runApp(new MyApp());
+
+class MyApp extends StatelessWidget {
+  // This widget is the root of your application.
   @override
-  State<StatefulWidget> createState() => new _MpAppState();
-}
-
-class _MpAppState extends State<MyApp> {
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: Text('Fill Me'),
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
+    return new MaterialApp(
+        title: 'Fill Me',
+        theme: new ThemeData(
+          primarySwatch: Colors.blue,
         ),
-        body: Center(
-            child: Text(
-          'Welcome',
-          style: TextStyle(fontSize: 20),
-        )));
+        navigatorObservers: <NavigatorObserver>[
+          MyRouteObserver(), // this will listen all changes
+        ],
+        routes:<String, WidgetBuilder>{
+          '/': (context) {
+            return Welcome();
+          },
+          '/rootpage': (context) {
+            return RootPage(
+              auth: new Auth(),
+              st: 'Register',
+            );
+          },
+        });
   }
 }

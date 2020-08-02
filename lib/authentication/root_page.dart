@@ -1,9 +1,8 @@
-import 'package:fillme/widgets/entry.dart';
 import 'package:fillme/widgets/munci.dart';
 import 'package:flutter/material.dart';
 
+import '../widgets/entry.dart';
 import 'login_page.dart';
-
 import 'auth.dart';
 
 AuthStatus authStatus = AuthStatus.notSignedIn;
@@ -49,9 +48,9 @@ class _RootPageState extends State<RootPage> {
       widget.auth.currentUser().then((email) {
         print(email);
         setState(() {
-          authStatus = email == '1xIVAImkgDPY2KIkfhPJ3kNxbNw2'
-              ? AuthStatus.municipal
-              : AuthStatus.signedIn;
+         authStatus = email == '1xIVAImkgDPY2KIkfhPJ3kNxbNw2'
+             ?  AuthStatus.municipal
+              :AuthStatus.signedIn;
         });
       });
     } else {
@@ -76,7 +75,11 @@ class _RootPageState extends State<RootPage> {
         }
       case AuthStatus.signedIn:
         {
-          return new EntryPage();
+          return new EntryPage(
+              selectedIndex: 0,
+              auth: widget.auth,
+              onSignOut: () => _updateAuthStatus(AuthStatus.notSignedIn),
+              );
         }
       case AuthStatus.municipal:
         {
