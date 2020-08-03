@@ -69,7 +69,14 @@ flutter:
     - assets/animations/qr-scan.json
      - assets/animations/weight.json
     - assets/animations/rewards.json
-    
+    - assets/image/ranju.jpeg
+    - assets/image/sumanth.jpg
+    - assets/image/anusha.jpg
+    - assets/image/elton.jpg
+    - assets/image/praveen.jpg
+    - assets/image/amogh.jpg
+    - assets/image/prashanth.jpg
+    - assets/image/shravya.jpg
     - assets/image/coupon.png
     
     - assets/image/rewards.png
