@@ -4,6 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'loader.dart';
 
+
+
+
 class GoogleMaps extends StatefulWidget {
   @override
   _BinMap createState() => _BinMap();
@@ -46,7 +49,9 @@ class _BinMap extends State<GoogleMaps> {
   void initState() {
     super.initState();
     getCurrentLocation();
+    
   }
+  
 
   @override
   Widget build(BuildContext context) {
@@ -77,3 +82,74 @@ class _BinMap extends State<GoogleMaps> {
     );
   }
 }
+
+
+
+Marker dustbin1 = Marker(
+  markerId: MarkerId('dustbin1'),
+  position: LatLng(13.536405, 74.789711),
+  infoWindow: InfoWindow(title: 'Shiriyara'),
+  icon: BitmapDescriptor.defaultMarkerWithHue(
+    BitmapDescriptor.hueViolet,
+  ),
+);
+
+Marker dustbin2 = Marker(
+  markerId: MarkerId('dustbin1'),
+  position: LatLng(13.512038, 74.773564),
+  infoWindow: InfoWindow(title: 'Sibrakatte'),
+  icon: BitmapDescriptor.defaultMarkerWithHue(
+    BitmapDescriptor.hueViolet,
+  ),
+);
+Marker dustbin3 = Marker(
+  markerId: MarkerId('dustbin1'),
+  position: LatLng(12.593435, 74.944917),
+  infoWindow: InfoWindow(title: 'kumbla bus stand'),
+  icon: BitmapDescriptor.defaultMarkerWithHue(
+    BitmapDescriptor.hueViolet,
+  ),
+);
+
+Marker dustbin4 = Marker(
+  markerId: MarkerId('dustbin1'),
+  position: LatLng(12.589358, 75.002048),
+  infoWindow: InfoWindow(title: 'Seethangoli'),
+  icon: BitmapDescriptor.defaultMarkerWithHue(
+    BitmapDescriptor.hueViolet,
+  ),
+);
+
+Marker dustbin5 = Marker(
+  markerId: MarkerId('dustbin1'),
+  position: LatLng(12.591515, 74.977665),
+  infoWindow: InfoWindow(title: 'Naikap'),
+  icon: BitmapDescriptor.defaultMarkerWithHue(
+    BitmapDescriptor.hueViolet,
+  ),
+);
+Marker dustbin6 = Marker(
+  markerId: MarkerId('dustbin1'),
+  position: LatLng(12.868517, 74.923913),
+  infoWindow: InfoWindow(title: 'adyar garden'),
+  icon: BitmapDescriptor.defaultMarkerWithHue(
+    BitmapDescriptor.hueViolet,
+  ),
+);
+Marker dustbin7 = Marker(
+  markerId: MarkerId('dustbin1'),
+  position: LatLng(12.869544, 74.864864),
+  infoWindow: InfoWindow(title: 'nantoor'),
+  icon: BitmapDescriptor.defaultMarkerWithHue(
+    BitmapDescriptor.hueViolet,
+  ),
+);
+
+Marker dustbin8 = Marker(
+  markerId: MarkerId('dustbin1'),
+  position: LatLng(12.863228, 74.837169),
+  infoWindow: InfoWindow(title: 'statebank busstop'),
+  icon: BitmapDescriptor.defaultMarkerWithHue(
+    BitmapDescriptor.hueViolet,
+  ),
+);

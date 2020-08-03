@@ -1,10 +1,13 @@
-
+import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:share/share.dart';
 import '../authentication/login_page.dart';
 import '../authentication/auth.dart';
 import '../qr_code_scan.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter/services.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 // ignore: must_be_immutable
 class EntryPage extends StatefulWidget {
@@ -18,27 +21,91 @@ class EntryPage extends StatefulWidget {
 }
 
 class _EntryPageState extends State<EntryPage> {
+  String email = "Fillme@gmail.com";
+  String _linkMessage;
+
+  @override
+  void initState() {
+    super.initState();
+    initDynamicLinks();
+    _createDynamicLink();
+  }
+
+  void _signOut() async {
+    try {
+      await widget.auth.signOut();
+      widget.onSignOut();
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  void _googlesignOut() async {
+    try {
+      await widget.auth.signOutGoogle();
+      widget.onSignOut();
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  void initDynamicLinks() async {
+    FirebaseDynamicLinks.instance.onLink(
+        onSuccess: (PendingDynamicLinkData dynamicLink) async {
+      final Uri deepLink = dynamicLink?.link;
+
+      if (deepLink != null) {
+        Navigator.pushNamed(context, deepLink.path);
+      }
+    }, onError: (OnLinkErrorException e) async {
+      print('onLinkError');
+      print(e.message);
+    });
+
+    final PendingDynamicLinkData data =
+        await FirebaseDynamicLinks.instance.getInitialLink();
+    final Uri deepLink = data?.link;
+
+    if (deepLink != null) {
+      print("deeplink path=${deepLink.path}");
+      Navigator.pushNamed(context, deepLink.path);
+    }
+  }
+
+  Future<void> _createDynamicLink() async {
+    final DynamicLinkParameters parameters = DynamicLinkParameters(
+      uriPrefix: 'https://fillme.page.link',
+      link: Uri.parse('https://fillme.page.link/rootpage'),
+      androidParameters: AndroidParameters(
+        packageName: 'com.example.tech_bin',
+        minimumVersion: 0,
+      ),
+      iosParameters: IosParameters(
+        bundleId: 'com.example.techBin',
+        minimumVersion: '1.0.1',
+        appStoreId: '123456789',
+      ),
+      dynamicLinkParametersOptions: DynamicLinkParametersOptions(
+        shortDynamicLinkPathLength: ShortDynamicLinkPathLength.short,
+      ),
+      socialMetaTagParameters: SocialMetaTagParameters(
+        title: 'Fill Me',
+        description: 'click here to install the app',
+      ),
+    );
+
+    Uri url;
+
+    final ShortDynamicLink shortLink = await parameters.buildShortLink();
+    url = shortLink.shortUrl;
+
+    setState(() {
+      _linkMessage = url.toString();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    void _signOut() async {
-      try {
-        await widget.auth.signOut();
-        widget.onSignOut();
-      } catch (e) {
-        print(e);
-      }
-    }
-
-    void _googlesignOut() async {
-      try {
-        await widget.auth.signOutGoogle();
-        widget.onSignOut();
-      } catch (e) {
-        print(e);
-      }
-    }
-
-    
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -58,9 +125,7 @@ class _EntryPageState extends State<EntryPage> {
                   Icons.search,
                   size: 30,
                 ),
-                onPressed: () {
-                 
-                }),
+                onPressed: () {}),
           ),
         ],
         centerTitle: true,
@@ -70,9 +135,7 @@ class _EntryPageState extends State<EntryPage> {
           SystemNavigator.pop();
           return Future.value(true);
         },
-        child: Center(
-          child:Text("Home")
-        ),
+        child: Center(child: Text("Home")),
       ),
       drawer: ClipRRect(
         borderRadius: BorderRadius.only(
@@ -117,7 +180,7 @@ class _EntryPageState extends State<EntryPage> {
                   title: new Row(children: [
                     Icon(
                       Icons.notifications_none,
-                      color:Colors.teal[400],
+                      color: Colors.teal[400],
                     ),
                     Container(
                       padding: EdgeInsets.fromLTRB(20, 10, 10, 10),
@@ -158,14 +221,12 @@ class _EntryPageState extends State<EntryPage> {
                         ),
                       ],
                     ),
-                    onTap: () {
-                     
-                    }),
+                    onTap: () {}),
                 ListTile(
                     title: new Row(children: [
                       Icon(
                         Icons.person_outline,
-                        color:Colors.teal[400],
+                        color: Colors.teal[400],
                       ),
                       Container(
                         padding: EdgeInsets.fromLTRB(20, 10, 10, 10),
@@ -179,14 +240,12 @@ class _EntryPageState extends State<EntryPage> {
                         ),
                       ),
                     ]),
-                    onTap: () {
-                     
-                    }),
+                    onTap: () {}),
                 ListTile(
                     title: new Row(children: [
                       Icon(
                         Icons.help_outline,
-                        color:Colors.teal[400],
+                        color: Colors.teal[400],
                       ),
                       Container(
                         padding: EdgeInsets.fromLTRB(20, 10, 10, 10),
@@ -201,7 +260,7 @@ class _EntryPageState extends State<EntryPage> {
                       ),
                     ]),
                     onTap: () {
-                      
+                      launch("mailto:$email");
                     }),
                 ListTile(
                     title: new Row(children: [
@@ -221,9 +280,7 @@ class _EntryPageState extends State<EntryPage> {
                         ),
                       )
                     ]),
-                    onTap: () {
-                      
-                    }),
+                    onTap: () {}),
                 ListTile(
                     title: new Row(children: [
                       Icon(
@@ -242,9 +299,7 @@ class _EntryPageState extends State<EntryPage> {
                         ),
                       ),
                     ]),
-                    onTap: () {
-                      
-                    }),
+                    onTap: () {}),
                 ListTile(
                     title: new Row(children: [
                       Icon(
@@ -264,13 +319,16 @@ class _EntryPageState extends State<EntryPage> {
                       ),
                     ]),
                     onTap: () {
-                     
+                      final RenderBox box = context.findRenderObject();
+                      Share.share(_linkMessage,
+                          sharePositionOrigin:
+                              box.localToGlobal(Offset.zero) & box.size);
                     }),
                 ListTile(
                   title: new Row(children: [
                     Icon(
                       Icons.exit_to_app,
-                      color:Colors.teal[400],
+                      color: Colors.teal[400],
                     ),
                     Container(
                       padding: EdgeInsets.fromLTRB(20, 10, 10, 10),
@@ -295,7 +353,7 @@ class _EntryPageState extends State<EntryPage> {
                       margin: EdgeInsets.fromLTRB(100, 50, 120, 0),
                       height: 4,
                       decoration: BoxDecoration(
-                        color:Colors.teal[400],
+                        color: Colors.teal[400],
                       ),
                     ),
                   ),
@@ -343,7 +401,7 @@ class _EntryPageState extends State<EntryPage> {
           currentIndex: widget.selectedIndex,
           type: BottomNavigationBarType.fixed,
           selectedFontSize: 15,
-            selectedItemColor: Colors.tealAccent[700],
+          selectedItemColor: Colors.tealAccent[700],
           unselectedItemColor: Colors.black26,
           items: [
             BottomNavigationBarItem(
@@ -377,7 +435,6 @@ class _EntryPageState extends State<EntryPage> {
           ],
           onTap: (index) {
             setState(() {
-              
               widget.selectedIndex = index;
             });
           },
