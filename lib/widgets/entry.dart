@@ -1,3 +1,5 @@
+import 'package:fillme/views/home_page.dart';
+import 'package:fillme/widgets/rewards.dart';
 import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -8,6 +10,8 @@ import '../qr_code_scan.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/services.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+import 'google_map.dart';
 
 // ignore: must_be_immutable
 class EntryPage extends StatefulWidget {
@@ -104,6 +108,11 @@ class _EntryPageState extends State<EntryPage> {
     });
   }
 
+  final _widgetOptions = [
+    new HomePage(),
+    new Rewards(),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -125,7 +134,14 @@ class _EntryPageState extends State<EntryPage> {
                   Icons.search,
                   size: 30,
                 ),
-                onPressed: () {}),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => GoogleMaps(),
+                    ),
+                  );
+                }),
           ),
         ],
         centerTitle: true,
@@ -135,7 +151,9 @@ class _EntryPageState extends State<EntryPage> {
           SystemNavigator.pop();
           return Future.value(true);
         },
-        child: Center(child: Text("Home")),
+        child: Center(
+          child: _widgetOptions.elementAt(widget.selectedIndex),
+        ),
       ),
       drawer: ClipRRect(
         borderRadius: BorderRadius.only(
@@ -221,7 +239,13 @@ class _EntryPageState extends State<EntryPage> {
                         ),
                       ],
                     ),
-                    onTap: () {}),
+                    onTap: () {
+                      setState(() {
+                         widget.selectedIndex = 1;
+                      });
+                     
+                    }
+                    ),
                 ListTile(
                     title: new Row(children: [
                       Icon(

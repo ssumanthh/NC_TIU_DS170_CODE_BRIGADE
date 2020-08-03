@@ -37,6 +37,7 @@ dependencies:
   share: ^0.6.4+3
   http: ^0.12.0+2
   uuid: ^2.0.1
+  flutter_polyline_points: ^0.2.2
   firebase_dynamic_links: ^0.5.3
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -67,7 +68,7 @@ flutter:
     - assets/image/waste.jpg
     - assets/image/qr.png
     - assets/animations/qr-scan.json
-     - assets/animations/weight.json
+    - assets/animations/weight.json
     - assets/animations/rewards.json
     
     - assets/image/coupon.png

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'dart:async';
+
 import 'package:percent_indicator/percent_indicator.dart';
-import 'package:fillme/qr_code_scan.dart';
+
 import 'package:google_fonts/google_fonts.dart';
 
 class HomePage extends StatefulWidget {

@@ -1,4 +1,4 @@
-import 'package:fillme/widgets/munci.dart';
+import 'package:fillme/Municipal/munci.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/entry.dart';
@@ -83,7 +83,9 @@ class _RootPageState extends State<RootPage> {
         }
       case AuthStatus.municipal:
         {
-          return new Municipale();
+         return new Munci(
+              auth: widget.auth,
+              onSignOut: () => _updateAuthStatus(AuthStatus.notSignedIn));
         }
     }
   }
