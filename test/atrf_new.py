@@ -208,7 +208,7 @@ if button :
             # codec = 'utf-8'
             laparams = LAParams()
             device = TextConverter(rsrcmgr, retstr, laparams=laparams)
-            fp = path
+            fp = path.read()
             interpreter = PDFPageInterpreter(rsrcmgr, device)
             maxpages = 0
             caching = True
