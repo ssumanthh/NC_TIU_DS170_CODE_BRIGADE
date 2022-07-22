@@ -179,16 +179,16 @@ if button :
         # c27 10 2021
         # c02 02 2022
         data = [
-                [tick,'q1', year, file1.name,date1],
-                [tick,'q2', year, file2.name,date2],
-            [tick,'q3', year, file3.name,date3],
-            [tick,'q4', year, file4.name,date4],
+                [tick,'q1', year, file1,date1],
+                [tick,'q2', year, file2,date2],
+            [tick,'q3', year, file3,date3],
+            [tick,'q4', year, file4,date4],
             
            
-            [tick1,'q1', year1, files1.name,dates1],
-                [tick1,'q2', year1, files3.name,dates2],
-            [tick1,'q3', year1, files3.name,dates3],
-            [tick1,'q4', year1, files4.name,dates4]
+            [tick1,'q1', year1, files1,dates1],
+                [tick1,'q2', year1, files3,dates2],
+            [tick1,'q3', year1, files3,dates3],
+            [tick1,'q4', year1, files4,dates4]
 
             ]
         df = pd.DataFrame(data=data, columns=columns)
@@ -208,7 +208,7 @@ if button :
             # codec = 'utf-8'
             laparams = LAParams()
             device = TextConverter(rsrcmgr, retstr, laparams=laparams)
-            fp = open(path, 'rb')
+            fp = path
             interpreter = PDFPageInterpreter(rsrcmgr, device)
             maxpages = 0
             caching = True
@@ -223,9 +223,9 @@ if button :
         text=""
         # iter_txt = []
         for i in range(number_of_inps):
-            file_extns = df['url'][i].split(".")
+            file_extns = df['url'][i].name.split(".")
             if(file_extns[-1]=="pdf"):
-                print(f"Processing {df['url'][i]}")
+                print(f"Processing {df['url'][i].name}")
                 text = convert_pdf_to_txt(df['url'][i])
                 text = re.sub("\n|\r", ".", text, flags=re.MULTILINE)
                 text = re.sub("\s\s+|\t", " ", text)
