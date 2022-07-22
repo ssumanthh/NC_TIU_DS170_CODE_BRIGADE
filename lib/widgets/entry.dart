@@ -304,7 +304,9 @@ class _EntryPageState extends State<EntryPage> {
                         ),
                       )
                     ]),
-                    onTap: () {}),
+                    onTap: () {
+                      
+                    }),
                 ListTile(
                     title: new Row(children: [
                       Icon(
