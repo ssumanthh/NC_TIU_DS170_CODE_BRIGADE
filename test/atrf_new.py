@@ -140,15 +140,15 @@ if button :
 
         columns = ['ticker','quarter', 'year', 'url']
         data = [
-            [tick.upper,'q1',year,url1],
-            [tick.upper,'q2',year,url2],
-            [tick.upper,'q3',year,url3],
-            [tick.upper,'q4',year,url4],
+            [tick,'q1',year,url1],
+            [tick,'q2',year,url2],
+            [tick,'q3',year,url3],
+            [tick,'q4',year,url4],
 
-            [tick1.upper,'q1',year1,url11],
-            [tick1.upper,'q2',year1,url12],
-            [tick1.upper,'q3',year1,url13],
-            [tick1.upper,'q4',year1,url14],
+            [tick1,'q1',year1,url11],
+            [tick1,'q2',year1,url12],
+            [tick1,'q3',year1,url13],
+            [tick1,'q4',year1,url14],
         ]
         df = pd.DataFrame(data=data, columns=columns)
         df['call_date'] = df['url'].apply(lambda x : pd.to_datetime(re.match(r".*(\d{4}/\d{2}/\d{2})", x).group(1)))
@@ -179,16 +179,16 @@ if button :
         # c27 10 2021
         # c02 02 2022
         data = [
-                [tick.upper,'q1', year, file1.name,date1],
-                [tick.upper,'q2', year, file2.name,date2],
-            [tick.upper,'q3', year, file3.name,date3],
-            [tick.upper,'q4', year, file4.name,date4],
+                [tick,'q1', year, file1.name,date1],
+                [tick,'q2', year, file2.name,date2],
+            [tick,'q3', year, file3.name,date3],
+            [tick,'q4', year, file4.name,date4],
             
            
-            [tick1.upper,'q1', year1, files1.name,dates1],
-                [tick1.upper,'q2', year1, files3.name,dates2],
-            [tick1.upper,'q3', year1, files3.name,dates3],
-            [tick1.upper,'q4', year1, files4.name,dates4]
+            [tick1,'q1', year1, files1.name,dates1],
+                [tick1,'q2', year1, files3.name,dates2],
+            [tick1,'q3', year1, files3.name,dates3],
+            [tick1,'q4', year1, files4.name,dates4]
 
             ]
         df = pd.DataFrame(data=data, columns=columns)
