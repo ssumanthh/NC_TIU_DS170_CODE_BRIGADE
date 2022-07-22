@@ -54,12 +54,23 @@ with c5:
     url4 = st.text_input("q4", placeholder="Enter URL")
 
 st.write("OR")
-file1 = st.file_uploader("4 files ", accept_multiple_files=True)
-st.write("Enter 4 URL")
+f1, f2 = st.columns(2)
+with f1:
+    file1 = st.file_uploader("file1 ", accept_multiple_files=False)
+with f2:
+    file2 = st.file_uploader("file2 ", accept_multiple_files=False)
+
+f3, f4 = st.columns(2)
+with f3:
+    file3 = st.file_uploader("file3 ", accept_multiple_files=False)
+
+with f4:
+    file4 = st.file_uploader("file4 ", accept_multiple_files=False)
+st.write("Enter Transcript date")
 d1, d2 = st.columns(2)
 with d1:
     date1 = st.text_input("date1", placeholder="DD-MM-YYY")
-with c2:
+with d2:
     date2 = st.text_input("date2", placeholder="DD-MM-YYY")
 
 d3, d4 = st.columns(2)
@@ -93,7 +104,20 @@ with c15:
     url14 = st.text_input("qt4", placeholder="Enter URL")
 
 st.write("OR")
-file2 = st.file_uploader("4 file", accept_multiple_files=True)
+f5, f6 = st.columns(2)
+with f5:
+    files1 = st.file_uploader("File11 ", accept_multiple_files=False)
+with f6:
+    files2 = st.file_uploader("File12 ", accept_multiple_files=False)
+
+f3, f4 = st.columns(2)
+with f3:
+    files3 = st.file_uploader("File13 ", accept_multiple_files=False)
+
+with f4:
+    files4 = st.file_uploader("File14 ", accept_multiple_files=False)
+
+st.write("Enter Transcript date")
 d5, d6 = st.columns(2)
 with d5:
     dates1 = st.text_input("dates1", placeholder="DD-MM-YYY")
@@ -101,29 +125,30 @@ with d6:
     dates2 = st.text_input("dates2", placeholder="DD-MM-YYY")
 
 d7, d8 = st.columns(2)
-with c3:
+with d7:
     dates3 = st.text_input("dates3", placeholder="DD-MM-YYY")
 
-with c4:
-    dates4 = st.text_input("dats4", placeholder="DD-MM-YYY")
+with d8:
+    dates4 = st.text_input("dates4", placeholder="DD-MM-YYY")
 
 
 button = st.button("Generate Output")
 
-if button == True :
-    if  url1!=None :
+if button :
+    st.write(url1)
+    if  url1!="" :
 
         columns = ['ticker','quarter', 'year', 'url']
         data = [
-            [tick,'q1',year,url1],
-            [tick,'q2',year,url2],
-            [tick,'q3',year,url3],
-            [tick,'q4',year,url4],
+            [tick.upper,'q1',year,url1],
+            [tick.upper,'q2',year,url2],
+            [tick.upper,'q3',year,url3],
+            [tick.upper,'q4',year,url4],
 
-            [tick1,'q1',year1,url11],
-            [tick1,'q2',year1,url12],
-            [tick1,'q3',year1,url13],
-            [tick1,'q4',year1,url14],
+            [tick1.upper,'q1',year1,url11],
+            [tick1.upper,'q2',year1,url12],
+            [tick1.upper,'q3',year1,url13],
+            [tick1.upper,'q4',year1,url14],
         ]
         df = pd.DataFrame(data=data, columns=columns)
         df['call_date'] = df['url'].apply(lambda x : pd.to_datetime(re.match(r".*(\d{4}/\d{2}/\d{2})", x).group(1)))
@@ -154,16 +179,16 @@ if button == True :
         # c27 10 2021
         # c02 02 2022
         data = [
-                [tick,'q1', year, file1[3].name,date1],
-                [tick,'q2', year, file1[2].name,date2],
-            [tick,'q3', year, file1[1].name,date3],
-            [tick,'q4', year, file1[0].name,date4],
+                [tick.upper,'q1', year, file1.name,date1],
+                [tick.upper,'q2', year, file2.name,date2],
+            [tick.upper,'q3', year, file3.name,date3],
+            [tick.upper,'q4', year, file4.name,date4],
             
            
-            [tick1,'q1', year1, file2[3].name,dates1],
-                [tick1,'q2', year1, file2[2].name,dates2],
-            [tick1,'q3', year1, file2[1].name,dates3],
-            [tick1,'q4', year1, file2[0].name,dates4]
+            [tick1.upper,'q1', year1, files1.name,dates1],
+                [tick1.upper,'q2', year1, files3.name,dates2],
+            [tick1.upper,'q3', year1, files3.name,dates3],
+            [tick1.upper,'q4', year1, files4.name,dates4]
 
             ]
         df = pd.DataFrame(data=data, columns=columns)
