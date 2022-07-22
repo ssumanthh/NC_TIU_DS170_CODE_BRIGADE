@@ -29,28 +29,7 @@ yfin.pdr_override()
 spacy_model = 'en_core_web_sm'
 nlp = spacy.load(spacy_model)
 
-# with st.form(key='columns_in_form'):
-#     c1, c2, c3, c4 = st.columns(4)
-#     with c1:
-#         initialInvestment = st.text_input("Starting capital",value=500)
-#     with c2:
-#         monthlyContribution = st.text_input("Monthly contribution (Optional)",value=100)
-#     with c3:
-#         annualRate = st.text_input("Annual increase rate in percentage",value="15")
-#     with c4:
-#         investingTimeYears = st.text_input("Duration in years:",value=10)
-#     submitButton = st.form_submit_button(label = 'Calculate')
 
-# st.write("Select the option to upload")
-# urlbutton = st.button("URL")
-# filebutton = st.button("Files")
-
-# select=False
-# button=False
-
-# if(urlbutton):
-# buff, col, buff2 = st.columns([1,3,1])
-# col.text_input('smaller text window:')
 st.title("Company 1")
 c1, c2 = st.columns(2)
 with c1:
@@ -76,6 +55,19 @@ with c5:
 
 st.write("OR")
 file1 = st.file_uploader("4 files ", accept_multiple_files=True)
+st.write("Enter 4 URL")
+d1, d2 = st.columns(2)
+with d1:
+    date1 = st.text_input("date1", placeholder="DD-MM-YYY")
+with c2:
+    date2 = st.text_input("date2", placeholder="DD-MM-YYY")
+
+d3, d4 = st.columns(2)
+with d3:
+    date3 = st.text_input("date3", placeholder="DD-MM-YYY")
+
+with d4:
+    date4 = st.text_input("date4", placeholder="DD-MM-YYY")
 
 st.title("Company 2")
 c6, c7 = st.columns(2)
@@ -102,6 +94,18 @@ with c15:
 
 st.write("OR")
 file2 = st.file_uploader("4 file", accept_multiple_files=True)
+d5, d6 = st.columns(2)
+with d5:
+    dates1 = st.text_input("dates1", placeholder="DD-MM-YYY")
+with d6:
+    dates2 = st.text_input("dates2", placeholder="DD-MM-YYY")
+
+d7, d8 = st.columns(2)
+with c3:
+    dates3 = st.text_input("dates3", placeholder="DD-MM-YYY")
+
+with c4:
+    dates4 = st.text_input("dats4", placeholder="DD-MM-YYY")
 
 
 button = st.button("Generate Output")
@@ -116,7 +120,10 @@ if button == True :
             [tick,'q3',year,url3],
             [tick,'q4',year,url4],
 
-          
+            [tick1,'q1',year1,url11],
+            [tick1,'q2',year1,url12],
+            [tick1,'q3',year1,url13],
+            [tick1,'q4',year1,url14],
         ]
         df = pd.DataFrame(data=data, columns=columns)
         df['call_date'] = df['url'].apply(lambda x : pd.to_datetime(re.match(r".*(\d{4}/\d{2}/\d{2})", x).group(1)))
@@ -137,15 +144,27 @@ if button == True :
         df['plain_text'] = df.apply(get_text, axis=1)
     else:
         columns = ['ticker','quarter', 'year', 'url', 'call_date']
-        number_of_inps = 4
+        number_of_inps = 8
+        # W19 05 2020
+        # W18 08 2020
+        # W17 11 2020
+        # W18 02 2021
+        # c5 05 2021
+        # c28 07 2021
+        # c27 10 2021
+        # c02 02 2022
         data = [
-                [tick,'q1', year, file1[3].name,'2019-08-01'],
-                [tick,'q2', year, file1[2].name,'2019-11-08'],
-            [tick,'q3', year, file1[1].name,'2020-01-29'],
-            [tick,'q4', year, file1[0].name,'2020-03-19'],
+                [tick,'q1', year, file1[3].name,date1],
+                [tick,'q2', year, file1[2].name,date2],
+            [tick,'q3', year, file1[1].name,date3],
+            [tick,'q4', year, file1[0].name,date4],
             
            
-           
+            [tick1,'q1', year1, file2[3].name,dates1],
+                [tick1,'q2', year1, file2[2].name,dates2],
+            [tick1,'q3', year1, file2[1].name,dates3],
+            [tick1,'q4', year1, file2[0].name,dates4]
+
             ]
         df = pd.DataFrame(data=data, columns=columns)
         df['call_date'] = pd.to_datetime(df['call_date'])
@@ -217,10 +236,7 @@ if button == True :
     def lemma_text(df_row):
         st.write(f"Processing {df_row['url']}, quarter: {df_row['quarter']}, year: {df_row['year']}")
         clean_text = []
-        if isinstance(df_row['plain_text'],float):
-            st.write(True)
-        else:
-            st.write(type(df_row['plain_text']))
+       
         doc = nlp(df_row['plain_text'])
         with doc.retokenize() as retokenizer:
             for ent in doc.ents:
@@ -327,10 +343,7 @@ if button == True :
     sentiment_df.insert(loc=7, column='lemma', value=word_lemmas)
 
     sentiment_df = sentiment_df.drop_duplicates('lemma')
-    # print(f'after drop_duplicates sentiment_df.shape {sentiment_df.shape}')
-    # print()
-    # print(f'sentiment_df[sentiments].sum()-->\n{sentiment_df[sentiments].sum()}')
-
+   
     df = df.reindex(columns= df.columns.to_list() + sentiments)
 
     sentiment_vectorizer = CountVectorizer()
@@ -346,9 +359,9 @@ if button == True :
 
     from matplotlib.transforms import Bbox
     fig = plt.figure(figsize=(15, 15))
-    tickers = df['ticker'].unique()
+    tickers = df['ticker'].unique().tolist()
     for index, ticker in enumerate(tickers):
-        pos = 220 + index + 1 # to create fig.add_subplot(221), fig.add_subplot(222), fig.add_subplot(223), fig.add_subplot(224)
+        pos = 220 + index + 1
         ax1 = fig.add_subplot(pos)
         sub_df = df.loc[df['ticker']==ticker,['call_date']+sentiments]
         sub_df = sub_df.sort_values('call_date',ascending=True)
@@ -373,34 +386,33 @@ if button == True :
 
     fig = plt.figure(figsize=(15, 15))
     fig.autofmt_xdate()
-    ticker = df['ticker'].unique()
-    # for index, ticker in enumerate(tickers):
-    pos = 221 # to create fig.add_subplot(221), fig.add_subplot(222), fig.add_subplot(223), fig.add_subplot(224)
-    ax1 = fig.add_subplot(pos)
+    tickers = df['ticker'].unique().tolist()
+    for index, ticker in enumerate(tickers):
+        pos = 220 + index + 1 
+        ax1 = fig.add_subplot(pos)
 
-    sub_df = df.loc[ticker,['call_date']+sentiments]
-    sub_df = sub_df.sort_values('call_date',ascending=True)
-    
-    valid_date_range = \
-    ((close_df.index >= sub_df['call_date'].min()) & 
-    (close_df.index <= sub_df['call_date'].max() + timedelta(days=days_after)))
-    st.write(valid_date_range)
-    price_sub_df = close_df.loc[valid_date_range,ticker]
-    color = 'tab:pink'
-    ax1.set_xlabel('date')
-    ax1.set_ylabel('sentiment count', color=color)
-    ax1.tick_params(axis='y', labelcolor=color)
+        sub_df = df.loc[df['ticker']==ticker,['call_date']+sentiments]
+        sub_df = sub_df.sort_values('call_date',ascending=True)
+        
+        valid_date_range = \
+        ((close_df.index >= sub_df['call_date'].min()) & 
+        (close_df.index <= sub_df['call_date'].max() + timedelta(days=days_after)))
+        price_sub_df = close_df.loc[valid_date_range,ticker]
+        color = 'tab:pink'
+        ax1.set_xlabel('date')
+        ax1.set_ylabel('sentiment count', color=color)
+        ax1.tick_params(axis='y', labelcolor=color)
 
-    ax1.plot(sub_df['call_date'], sub_df[sentiments], marker='o')
-    ax1.set_title(ticker)
-    plt.setp(ax1.get_xticklabels(), rotation=30, horizontalalignment='right')
-    ax1.legend(sentiments, loc='upper left')
-    ax1.xaxis.grid() # vertical lines
-    color = 'tab:purple'
-    ax2 = ax1.twinx()  # instantiate a second axes that shares the same x-axis
-    ax2.set_ylabel('share price (close)', color=color)  # we already handled the x-label with ax1
-    ax2.plot(price_sub_df.index, price_sub_df, color=color)
-    ax2.tick_params(axis='y', labelcolor=color)
-    fig.tight_layout()  # otherwise the right y-label is slightly clipped
+        ax1.plot(sub_df['call_date'], sub_df[sentiments], marker='o')
+        ax1.set_title(ticker)
+        plt.setp(ax1.get_xticklabels(), rotation=30, horizontalalignment='right')
+        ax1.legend(sentiments, loc='upper left')
+        ax1.xaxis.grid() # vertical lines
+        color = 'tab:purple'
+        ax2 = ax1.twinx()  
+        ax2.set_ylabel('share price (close)', color=color)
+        ax2.plot(price_sub_df.index, price_sub_df, color=color)
+        ax2.tick_params(axis='y', labelcolor=color)
+    fig.tight_layout() 
     st.pyplot(fig)
 
